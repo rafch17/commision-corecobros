@@ -34,6 +34,9 @@ public class Commission {
     @Column(name = "NAME", length = 100, nullable = false)
     private String name;
 
+    @Column(name = "UNIQUE_ID", length = 10, nullable = false, unique = true)
+    private String uniqueId;
+
     @Column(name = "CHARGE_DISTRIBUTION", length = 3, nullable = false)
     private String chargeDistribution;
 

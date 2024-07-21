@@ -30,11 +30,11 @@ public class ItemCommission {
     @Column(name = "ITEM_COMMISSION_ID", nullable = false)
     private Long id;
 
-    @Column(name = "COMMISSION_ID", length = 10, nullable = false)
+    @Column(name = "COMMISSION_ID", nullable = false)
     private Long commissionId;
 
-    @Column(name = "ITEM_ID", length = 10, nullable = false)
-    private String itemId;
+    @Column(name = "UNIQUE_ID", length = 10, nullable = false, unique = true)
+    private String uniqueId;
 
     @Column(name = "ITEM_TYPE", length = 3, nullable = false)
     private String itemType;
@@ -47,10 +47,11 @@ public class ItemCommission {
     @JsonBackReference
     private Commission commission;
 
+    
     public ItemCommission(Long id) {
         this.id = id;
     }
-
+    
     @Override
     public int hashCode() {
         final int prime = 31;
