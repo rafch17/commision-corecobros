@@ -48,10 +48,10 @@ public class ItemCommission {
     private Commission commission;
 
     
-    public ItemCommission(Long id) {
-        this.id = id;
+    public ItemCommission(String uniqueId) {
+        this.uniqueId = uniqueId;
     }
-    
+
     @Override
     public int hashCode() {
         final int prime = 31;

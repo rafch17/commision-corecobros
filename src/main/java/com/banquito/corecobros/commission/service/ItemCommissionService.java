@@ -22,12 +22,17 @@ public class ItemCommissionService {
         this.itemCommissionMapper = itemCommissionMapper;
     }
 
-    public List<ItemCommissionDTO> obtainItemCommissionByCommissionUniqueId(String uniqueId) {
-        List<ItemCommission> itemCommission = itemCommissionRepository.findByUniqueIdItemCommission_Commission(uniqueId);
+    public List<ItemCommissionDTO> obtainItemCommissionByUniqueId(String uniqueId) {
+        List<ItemCommission> itemCommission = itemCommissionRepository.findtemCommissionByUniqueId(uniqueId);	
         return itemCommission.stream()
                 .map(itemCommissionMapper::toDTO)
                 .collect(Collectors.toList());
     }
+
+
+    
+
+
 
     
 }

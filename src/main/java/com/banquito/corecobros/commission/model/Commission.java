@@ -56,8 +56,9 @@ public class Commission {
     @JsonManagedReference
     private List<ItemCommission> commissions;
 
-    public Commission(Long id) {
-        this.id = id;
+    
+    public Commission(String uniqueId) {
+        this.uniqueId = uniqueId;
     }
 
     @Override

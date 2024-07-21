@@ -8,6 +8,8 @@ import com.banquito.corecobros.commission.dto.CommissionDTO;
 import com.banquito.corecobros.commission.model.Commission;
 import com.banquito.corecobros.commission.repository.CommissionRepository;
 
+import java.util.List;
+
 @Service
 public class CommissionService {
 
@@ -23,6 +25,10 @@ public class CommissionService {
     public Optional<CommissionDTO> obtainCommissionByUniqueId(String uniqueId) {
         Optional<Commission> commission = commissionRepository.findByUniqueId(uniqueId);
         return commission.map(commissionMapper::toDTO);
+    }
+
+    public List<Commission> obtainCommissionsByItemCommissionUniqueId(String uniqueId) {
+        return commissionRepository.findByItemCommissionUniqueId(uniqueId);
     }
 
     public CommissionDTO saveCommission(CommissionDTO commissionDTO) {
