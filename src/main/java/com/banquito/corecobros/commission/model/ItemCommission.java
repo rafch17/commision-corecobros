@@ -47,9 +47,8 @@ public class ItemCommission {
     @JsonBackReference
     private Commission commission;
 
-    
-    public ItemCommission(String uniqueId) {
-        this.uniqueId = uniqueId;
+    public ItemCommission(Long id) {
+        this.id = id;
     }
 
     @Override

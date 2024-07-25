@@ -3,7 +3,8 @@ package com.banquito.corecobros.commission.service;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
-import com.banquito.corecobros.commision.util.mapper.CommissionMapper;
+import com.banquito.corecobros.commission.util.mapper.CommissionMapper;
+import com.banquito.corecobros.commission.util.uniqueId.UniqueIdGeneration;
 import com.banquito.corecobros.commission.dto.CommissionDTO;
 import com.banquito.corecobros.commission.model.Commission;
 import com.banquito.corecobros.commission.repository.CommissionRepository;
@@ -15,11 +16,10 @@ public class CommissionService {
 
     private final CommissionRepository commissionRepository;
     private final CommissionMapper commissionMapper;
-   
-   
+
     public CommissionService(CommissionRepository commissionRepository, CommissionMapper commissionMapper) {
         this.commissionRepository = commissionRepository;
-        this.commissionMapper = CommissionMapper.INSTANCE;
+        this.commissionMapper = commissionMapper;
     }
 
     public Optional<CommissionDTO> obtainCommissionByUniqueId(String uniqueId) {
@@ -31,15 +31,20 @@ public class CommissionService {
         return commissionRepository.findByItemCommissionUniqueId(uniqueId);
     }
 
-    public CommissionDTO saveCommission(CommissionDTO commissionDTO) {
+    public CommissionDTO create(CommissionDTO commissionDTO) {
+        UniqueIdGeneration uniqueIdGenerator = new UniqueIdGeneration();
+        String uniqueId;
+        boolean uniqueIdExists;
+
+        do {
+            uniqueId = uniqueIdGenerator.getUniqueId();
+            uniqueIdExists = commissionRepository.findByUniqueId(uniqueId).isPresent();
+        } while (uniqueIdExists);
+
         Commission commission = commissionMapper.toEntity(commissionDTO);
+        commission.setUniqueId(uniqueId);
         Commission savedCommission = commissionRepository.save(commission);
         return commissionMapper.toDTO(savedCommission);
     }
-
-
-    
-
-
 
 }
