@@ -14,7 +14,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CommissionDTO {
 
-    private Long id;
+    private Integer id;
     private String name;
     private String uniqueId;
     private String chargeDistribution;

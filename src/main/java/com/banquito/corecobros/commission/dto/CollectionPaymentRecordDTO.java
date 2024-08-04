@@ -8,8 +8,8 @@ import java.time.LocalDate;
 @Value
 @Builder
 public class CollectionPaymentRecordDTO {
-    private Long idCollection;
-    private Long itemCommissionId;
+    private Integer idCollection;
+    private Integer itemCommissionId;
     private String uniqueId;
     private BigDecimal ammount;
     private String type;

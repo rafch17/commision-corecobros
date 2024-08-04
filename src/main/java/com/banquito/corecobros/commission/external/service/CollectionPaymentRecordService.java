@@ -11,8 +11,8 @@ public class CollectionPaymentRecordService {
 
     public List<CollectionPaymentRecordDTO> getAllByItemCollection(String uniqueId) {
         return List.of(CollectionPaymentRecordDTO.builder()
-                .idCollection(1L)
-                .itemCommissionId(1L)
+                .idCollection(1)
+                .itemCommissionId(1)
                 .uniqueId("COLPAY001")
                 .ammount(BigDecimal.valueOf(20.0))
                 .type("TOT")
