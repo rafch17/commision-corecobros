@@ -57,11 +57,14 @@ public class CommissionService {
             uniqueIdExists = commissionRepository.findByUniqueId(uniqueId).isPresent();
         } while (uniqueIdExists);
 
-        System.out.println("Unique ID: " + uniqueId);
         Commission commission = commissionMapper.toEntity(commissionDTO);
         commission.setUniqueId(uniqueId);
         Commission savedCommission = commissionRepository.save(commission);
         return commissionMapper.toDTO(savedCommission);
+    }
+
+    public List<Commission> getAllCommissions() {
+        return commissionRepository.findAll();
     }
 
 }

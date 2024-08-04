@@ -21,13 +21,15 @@ import com.banquito.corecobros.commission.service.CommissionService;
 @CrossOrigin(origins = "*", allowedHeaders = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT,
         RequestMethod.DELETE })
 @RequestMapping("/api/v1/commissions")
-public class CommisionController {
+public class CommissionController {
 
     private final CommissionService commissionService;
 
-    public CommisionController(CommissionService commissionService) {
+    public CommissionController(CommissionService commissionService) {
         this.commissionService = commissionService;
     }
+
+
 
     @GetMapping("/{uniqueId}")
     public ResponseEntity<CommissionDTO> getByUniqueId(@PathVariable String uniqueId) {
@@ -60,5 +62,16 @@ public class CommisionController {
             return ResponseEntity.badRequest().build();
         }
     }
+
+    @GetMapping("/")
+    public ResponseEntity<List<Commission>> getAllCommissions() {
+        List<Commission> commissions = commissionService.getAllCommissions();
+        if (commissions.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(commissions);
+        }
+    }
+
 
 }
