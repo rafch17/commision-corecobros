@@ -28,10 +28,10 @@ public class ItemCommission {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ITEM_COMMISSION_ID", nullable = false)
-    private Long id;
+    private Integer id;
 
     @Column(name = "COMMISSION_ID", nullable = false)
-    private Long commissionId;
+    private Integer commissionId;
 
     @Column(name = "UNIQUE_ID", length = 10, nullable = false, unique = true)
     private String uniqueId;
@@ -53,7 +53,7 @@ public class ItemCommission {
     @JsonBackReference
     private Commission commission;
 
-    public ItemCommission(Long id) {
+    public ItemCommission(Integer id) {
         this.id = id;
     }
 

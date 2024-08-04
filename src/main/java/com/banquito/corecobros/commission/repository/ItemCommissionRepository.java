@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.banquito.corecobros.commission.model.ItemCommission;
 
 @Repository
-public interface ItemCommissionRepository extends JpaRepository<ItemCommission, Long> {
+public interface ItemCommissionRepository extends JpaRepository<ItemCommission, Integer> {
 
     Optional<ItemCommission> findByUniqueId(String uniqueId);
 
