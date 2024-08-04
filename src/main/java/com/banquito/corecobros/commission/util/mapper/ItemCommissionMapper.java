@@ -1,6 +1,7 @@
 package com.banquito.corecobros.commission.util.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.ReportingPolicy;
 
@@ -11,7 +12,8 @@ import com.banquito.corecobros.commission.model.ItemCommission;
 public interface ItemCommissionMapper {
 
     ItemCommissionDTO toDTO(ItemCommission itemCommission);
-
+    
+    @Mapping(target = "commission", ignore = true)
     ItemCommission toEntity(ItemCommissionDTO itemCommissionDTO);
 
 }

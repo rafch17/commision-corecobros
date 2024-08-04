@@ -22,7 +22,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity
-@Table(name = "COMMISSION")
+@Table(name = "ITEM_COMMISSION")
 public class ItemCommission {
 
     @Id
@@ -35,6 +35,12 @@ public class ItemCommission {
 
     @Column(name = "UNIQUE_ID", length = 10, nullable = false, unique = true)
     private String uniqueId;
+
+    @Column(name = "ITEM_COLLECTION_UNIQUE_ID", length = 10, nullable = false)
+    private String itemCollectionUniqueId;
+
+    @Column(name = "ORDER_UNIQUE_ID", length = 10, nullable = false)
+    private String orderUniqueId;
 
     @Column(name = "ITEM_TYPE", length = 3, nullable = false)
     private String itemType;

@@ -5,12 +5,16 @@ import java.util.Optional;
 
 import com.banquito.corecobros.commission.util.mapper.CommissionMapper;
 import com.banquito.corecobros.commission.util.uniqueId.UniqueIdGeneration;
+
+import lombok.extern.slf4j.Slf4j;
+
 import com.banquito.corecobros.commission.dto.CommissionDTO;
 import com.banquito.corecobros.commission.model.Commission;
 import com.banquito.corecobros.commission.repository.CommissionRepository;
 
 import java.util.List;
 
+@Slf4j
 @Service
 public class CommissionService {
 
@@ -27,6 +31,18 @@ public class CommissionService {
         return commission.map(commissionMapper::toDTO);
     }
 
+    public Commission getByCompanyUniqueId(String companyUniqueId) {
+        return commissionRepository.findByCompanyUniqueId(companyUniqueId).orElseThrow(() -> {
+            log.error("Commission not found for companyUniqueId {}", companyUniqueId);
+            throw new RuntimeException("Commission not found for companyUniqueId " + companyUniqueId);
+        });
+    }
+
+    public CommissionDTO getCommisionDTOByCompanyUniqueId(String companyUniqueId) {
+        Commission commission = getByCompanyUniqueId(companyUniqueId);
+        return commissionMapper.toDTO(commission);
+    }
+
     public List<Commission> obtainCommissionsByItemCommissionUniqueId(String uniqueId) {
         return commissionRepository.findByItemCommissionUniqueId(uniqueId);
     }
@@ -41,6 +57,7 @@ public class CommissionService {
             uniqueIdExists = commissionRepository.findByUniqueId(uniqueId).isPresent();
         } while (uniqueIdExists);
 
+        System.out.println("Unique ID: " + uniqueId);
         Commission commission = commissionMapper.toEntity(commissionDTO);
         commission.setUniqueId(uniqueId);
         Commission savedCommission = commissionRepository.save(commission);

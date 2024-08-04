@@ -1,19 +1,24 @@
 package com.banquito.corecobros.commission.dto;
 
-import lombok.Builder;
-import lombok.Value;
-
 import java.math.BigDecimal;
 
-@Value
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
 @Builder
 public class ItemCommissionDTO {
 
-    private Long id;
-    private Long commissionId;
-    private String uniqueId;
-    private String itemId;
+    private Long id; //no al crear
+    private Long commissionId; //no al crear
+    private String uniqueId; //no al crear
+    private String companyUniqueId;
+    private String orderUniqueId;
+    private String itemUniqueId;
     private String itemType;
-    private BigDecimal commissionValue;
-
+    private BigDecimal commissionValue; //no al crear
 }
