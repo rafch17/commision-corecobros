@@ -61,12 +61,12 @@ public class ItemCommissionService {
         return item;
     }
 
-    public ItemCommissionDTO getByItemCollectionUniqueId(String itemCollectionUniqueId) {
+    public ItemCommissionDTO getByItemUniqueId(String itemUniqueId) {
         Optional<ItemCommission> itemCommission = itemCommissionRepository
-                .findByItemCollectionUniqueId(itemCollectionUniqueId);
+                .findByItemUniqueId(itemUniqueId);
         return itemCommission.map(itemCommissionMapper::toDTO).orElseThrow(() -> {
-            log.error("ItemCommission not found for itemCollectionUniqueId {}", itemCollectionUniqueId);
-            throw new RuntimeException("ItemCommission not found for itemCollectionUniqueId " + itemCollectionUniqueId);
+            log.error("ItemCommission not found for itemUniqueId {}", itemUniqueId);
+            throw new RuntimeException("ItemCommission not found for itemUniqueId " + itemUniqueId);
         });
     }
 

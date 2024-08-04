@@ -51,10 +51,10 @@ public class ItemCommissionController {
         }
     }
 
-    @GetMapping("/item-collection/{itemCollectionUniqueId}")
-    public ResponseEntity<ItemCommissionDTO> getByItemCollectionUniqueId(@PathVariable String itemCollectionUniqueId) {
+    @GetMapping("/item/{itemUniqueId}")
+    public ResponseEntity<ItemCommissionDTO> getByItemUniqueId(@PathVariable String itemUniqueId) {
         try {
-            ItemCommissionDTO itemCommission = itemCommissionService.getByItemCollectionUniqueId(itemCollectionUniqueId);
+            ItemCommissionDTO itemCommission = itemCommissionService.getByItemUniqueId(itemUniqueId);
             return ResponseEntity.ok(itemCommission);
         } catch (RuntimeException rte) {
             rte.printStackTrace();
@@ -62,7 +62,7 @@ public class ItemCommissionController {
         }
     }
 
-    
+
 
     @GetMapping("/get-total-by-order/{orderUniqueId}/{companyUniqueId}")
     public ResponseEntity<CommissionDTO> getByItem(@PathVariable String orderUniqueId, @PathVariable String companyUniqueId) {

@@ -14,7 +14,7 @@ public interface ItemCommissionRepository extends JpaRepository<ItemCommission, 
 
     Optional<ItemCommission> findByUniqueId(String uniqueId);
 
-    Optional<ItemCommission> findByItemCollectionUniqueId(String itemCollectionUniqueId);
+    Optional<ItemCommission> findByItemUniqueId(String itemUniqueId);
 
     @Query("SELECT SUM(ic.commissionValue) FROM ItemCommission ic WHERE ic.orderUniqueId = :orderUniqueId")
     BigDecimal sumCommissionValueByOrderUniqueId(String orderUniqueId);

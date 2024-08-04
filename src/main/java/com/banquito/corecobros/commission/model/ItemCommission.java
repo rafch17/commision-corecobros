@@ -36,8 +36,8 @@ public class ItemCommission {
     @Column(name = "UNIQUE_ID", length = 10, nullable = false, unique = true)
     private String uniqueId;
 
-    @Column(name = "ITEM_COLLECTION_UNIQUE_ID", length = 10, nullable = false)
-    private String itemCollectionUniqueId;
+    @Column(name = "ITEM_UNIQUE_ID", length = 10, nullable = false)
+    private String itemUniqueId;
 
     @Column(name = "ORDER_UNIQUE_ID", length = 10, nullable = false)
     private String orderUniqueId;
