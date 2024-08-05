@@ -40,7 +40,7 @@ public class Commission {
     @Column(name = "CHARGE_DISTRIBUTION", length = 3, nullable = false)
     private String chargeDistribution;
 
-    @Column(name = "COMPANY_UNIQUE_ID", length = 10, nullable = false, unique = true)
+    @Column(name = "COMPANY_UNIQUE_ID", length = 10, nullable = false)
     private String companyUniqueId;
 
     @Column(name = "VALUE", precision = 17, scale = 2, nullable = false)
