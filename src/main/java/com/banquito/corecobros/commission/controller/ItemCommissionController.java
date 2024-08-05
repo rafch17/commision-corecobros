@@ -22,7 +22,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @CrossOrigin(origins = "*", allowedHeaders = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT,
         RequestMethod.DELETE })
 @RestController
-@RequestMapping("/item-commission-microservice/api/v1/item-commissions")
+@RequestMapping("/commission-microservice/api/v1/item-commissions")
 @Tag(name = "ItemCommission", description = "Endpoints for managing item-commission")
 public class ItemCommissionController {
 
