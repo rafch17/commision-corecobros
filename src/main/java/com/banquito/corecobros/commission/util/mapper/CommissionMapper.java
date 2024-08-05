@@ -9,7 +9,9 @@ import com.banquito.corecobros.commission.model.Commission;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CommissionMapper {
+
     CommissionDTO toDTO(Commission commission);
 
     Commission toEntity(CommissionDTO commissionDTO);
+
 }

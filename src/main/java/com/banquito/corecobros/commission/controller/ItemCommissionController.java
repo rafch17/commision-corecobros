@@ -16,10 +16,14 @@ import com.banquito.corecobros.commission.dto.CommissionDTO;
 import com.banquito.corecobros.commission.dto.ItemCommissionDTO;
 import com.banquito.corecobros.commission.service.ItemCommissionService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @CrossOrigin(origins = "*", allowedHeaders = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT,
         RequestMethod.DELETE })
 @RestController
-@RequestMapping("/api/v1/item-commissions")
+@RequestMapping("/item-commission-microservice/api/v1/item-commissions")
+@Tag(name = "ItemCommission", description = "Endpoints for managing item-commission")
 public class ItemCommissionController {
 
     private final ItemCommissionService itemCommissionService;
@@ -29,6 +33,7 @@ public class ItemCommissionController {
     }
 
     @GetMapping("/{uniqueId}")
+    @Operation(summary = "Get itemCommission by uniqueId", description = "Retrieve a itemCommission by its uniqueId")
     public ResponseEntity<List<ItemCommissionDTO>> getItemCommissionByCommissionUniqueId(
             @PathVariable String uniqueId) {
         try {
@@ -41,6 +46,7 @@ public class ItemCommissionController {
     }
 
     @PostMapping("/")
+    @Operation(summary = "Create a itemCommission", description = "Create a new itemCommission")
     public ResponseEntity<ItemCommissionDTO> create(@RequestBody ItemCommissionDTO itemCommissionDTO) {
         try {
             ItemCommissionDTO savedItemCommission = itemCommissionService.create(itemCommissionDTO);
@@ -52,6 +58,7 @@ public class ItemCommissionController {
     }
 
     @GetMapping("/item/{itemUniqueId}")
+    @Operation(summary = "Get itemCommission by itemCollection", description = "Retrieve a itemCommission by its itemCollection")
     public ResponseEntity<ItemCommissionDTO> getByItemUniqueId(@PathVariable String itemUniqueId) {
         try {
             ItemCommissionDTO itemCommission = itemCommissionService.getByItemUniqueId(itemUniqueId);
@@ -62,10 +69,11 @@ public class ItemCommissionController {
         }
     }
 
-
-
     @GetMapping("/get-total-by-order/{orderUniqueId}/{companyUniqueId}")
-    public ResponseEntity<CommissionDTO> getByItem(@PathVariable String orderUniqueId, @PathVariable String companyUniqueId) {
-        return ResponseEntity.ok(itemCommissionService.sumTotalCommissionValueByOrderUniqueId(orderUniqueId, companyUniqueId));
+    @Operation(summary = "Get total commission by orderUniqueId and companyUniqueId", description = "Retrieve a total commission by orderUniqueId and companyUniqueId")
+    public ResponseEntity<CommissionDTO> getByItem(@PathVariable String orderUniqueId,
+            @PathVariable String companyUniqueId) {
+        return ResponseEntity
+                .ok(itemCommissionService.sumTotalCommissionValueByOrderUniqueId(orderUniqueId, companyUniqueId));
     }
 }

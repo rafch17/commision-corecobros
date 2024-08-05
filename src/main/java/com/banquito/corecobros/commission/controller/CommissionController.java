@@ -17,10 +17,14 @@ import com.banquito.corecobros.commission.dto.CommissionDTO;
 import com.banquito.corecobros.commission.model.Commission;
 import com.banquito.corecobros.commission.service.CommissionService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT,
         RequestMethod.DELETE })
-@RequestMapping("/api/v1/commissions")
+@RequestMapping("/commission-microservice/api/v1/commissions")
+@Tag(name = "Commission", description = "Endpoints for managing commission")
 public class CommissionController {
 
     private final CommissionService commissionService;
@@ -29,9 +33,8 @@ public class CommissionController {
         this.commissionService = commissionService;
     }
 
-
-
     @GetMapping("/{uniqueId}")
+    @Operation(summary = "Get commission by uniqueId", description = "Retrieve a commission by its uniqueId")
     public ResponseEntity<CommissionDTO> getByUniqueId(@PathVariable String uniqueId) {
         try {
             Optional<CommissionDTO> commission = commissionService.obtainCommissionByUniqueId(uniqueId);
@@ -43,6 +46,7 @@ public class CommissionController {
     }
 
     @GetMapping("/item-commissions/{uniqueId}")
+    @Operation(summary = "Get ItemCommission by uniqueId", description = "Retrieve a ItemCommission by its uniqueId")
     public ResponseEntity<List<Commission>> getByItemCommissionUniqueId(@PathVariable String uniqueId) {
         List<Commission> commissions = commissionService.obtainCommissionsByItemCommissionUniqueId(uniqueId);
         if (commissions.isEmpty()) {
@@ -53,6 +57,7 @@ public class CommissionController {
     }
 
     @PostMapping("/")
+    @Operation(summary = "Create a commission", description = "Create a new commission")
     public ResponseEntity<CommissionDTO> create(@RequestBody CommissionDTO commissionDTO) {
         try {
             CommissionDTO savedCommission = commissionService.create(commissionDTO);
@@ -64,6 +69,7 @@ public class CommissionController {
     }
 
     @GetMapping("/")
+    @Operation(summary = "Get all commissions", description = "Retrieve a list of all commissions")
     public ResponseEntity<List<Commission>> getAllCommissions() {
         List<Commission> commissions = commissionService.getAllCommissions();
         if (commissions.isEmpty()) {
@@ -72,6 +78,5 @@ public class CommissionController {
             return ResponseEntity.ok(commissions);
         }
     }
-
 
 }

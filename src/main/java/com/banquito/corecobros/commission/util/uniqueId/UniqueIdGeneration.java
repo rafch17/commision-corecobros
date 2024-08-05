@@ -36,7 +36,6 @@ public class UniqueIdGeneration {
 		return sb.toString();
 	}
 
-	
 	public String getUniqueId() {
 		return uniqueId;
 	}

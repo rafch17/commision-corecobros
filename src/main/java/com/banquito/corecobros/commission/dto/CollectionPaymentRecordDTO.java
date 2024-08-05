@@ -8,6 +8,7 @@ import java.time.LocalDate;
 @Value
 @Builder
 public class CollectionPaymentRecordDTO {
+
     private Integer idCollection;
     private Integer itemCommissionId;
     private String uniqueId;

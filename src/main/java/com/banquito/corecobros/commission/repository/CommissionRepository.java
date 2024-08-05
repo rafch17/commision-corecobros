@@ -18,4 +18,5 @@ public interface CommissionRepository extends JpaRepository<Commission, Long> {
     List<Commission> findByItemCommissionUniqueId(String uniqueId);
 
     Optional<Commission> findByCompanyUniqueId(String companyUniqueId);
+
 }

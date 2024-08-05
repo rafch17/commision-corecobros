@@ -12,7 +12,7 @@ import com.banquito.corecobros.commission.model.ItemCommission;
 public interface ItemCommissionMapper {
 
     ItemCommissionDTO toDTO(ItemCommission itemCommission);
-    
+
     @Mapping(target = "commission", ignore = true)
     ItemCommission toEntity(ItemCommissionDTO itemCommissionDTO);
 

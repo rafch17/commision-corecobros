@@ -5,7 +5,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.math.BigDecimal;
 
-import org.hibernate.mapping.Collection;
 import org.springframework.stereotype.Service;
 
 import com.banquito.corecobros.commission.dto.CommissionDTO;
@@ -56,7 +55,7 @@ public class ItemCommissionService {
         itemCommission.setCommissionValue(commission.getValue());
         itemCommission.setCommissionId(commission.getId());
         ItemCommission savedItemCommission = itemCommissionRepository.save(itemCommission);
-        ItemCommissionDTO item =  itemCommissionMapper.toDTO(savedItemCommission);
+        ItemCommissionDTO item = itemCommissionMapper.toDTO(savedItemCommission);
         item.setCompanyUniqueId(commission.getCompanyUniqueId());
         return item;
     }

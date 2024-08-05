@@ -13,12 +13,13 @@ import lombok.Setter;
 @Builder
 public class ItemCommissionDTO {
 
-    private Long id; //no al crear
-    private Long commissionId; //no al crear
-    private String uniqueId; //no al crear
+    private Long id;
+    private Long commissionId;
+    private String uniqueId;
     private String companyUniqueId;
     private String orderUniqueId;
     private String itemUniqueId;
     private String itemType;
-    private BigDecimal commissionValue; //no al crear
+    private BigDecimal commissionValue;
+
 }
