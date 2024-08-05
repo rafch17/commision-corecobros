@@ -33,6 +33,29 @@ public class CommissionController {
         this.commissionService = commissionService;
     }
 
+    @GetMapping
+    @Operation(summary = "Get all commissions", description = "Retrieve a list of all commissions")
+    public ResponseEntity<List<Commission>> getAllCommissions() {
+        List<Commission> commissions = commissionService.getAllCommissions();
+        if (commissions.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(commissions);
+        }
+    }
+
+    @PostMapping
+    @Operation(summary = "Create a commission", description = "Create a new commission")
+    public ResponseEntity<CommissionDTO> create(@RequestBody CommissionDTO commissionDTO) {
+        try {
+            CommissionDTO savedCommission = commissionService.create(commissionDTO);
+            return ResponseEntity.ok(savedCommission);
+        } catch (RuntimeException rte) {
+            rte.printStackTrace();
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
     @GetMapping("/{uniqueId}")
     @Operation(summary = "Get commission by uniqueId", description = "Retrieve a commission by its uniqueId")
     public ResponseEntity<CommissionDTO> getByUniqueId(@PathVariable String uniqueId) {
@@ -55,28 +78,4 @@ public class CommissionController {
             return ResponseEntity.ok(commissions);
         }
     }
-
-    @PostMapping("/")
-    @Operation(summary = "Create a commission", description = "Create a new commission")
-    public ResponseEntity<CommissionDTO> create(@RequestBody CommissionDTO commissionDTO) {
-        try {
-            CommissionDTO savedCommission = commissionService.create(commissionDTO);
-            return ResponseEntity.ok(savedCommission);
-        } catch (RuntimeException rte) {
-            rte.printStackTrace();
-            return ResponseEntity.badRequest().build();
-        }
-    }
-
-    @GetMapping("/")
-    @Operation(summary = "Get all commissions", description = "Retrieve a list of all commissions")
-    public ResponseEntity<List<Commission>> getAllCommissions() {
-        List<Commission> commissions = commissionService.getAllCommissions();
-        if (commissions.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.ok(commissions);
-        }
-    }
-
 }
