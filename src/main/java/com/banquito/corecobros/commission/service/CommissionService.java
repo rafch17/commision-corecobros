@@ -42,9 +42,16 @@ public class CommissionService {
         Commission commission = getByCompanyUniqueId(companyUniqueId);
         return commissionMapper.toDTO(commission);
     }
+    
 
+    
     public List<Commission> obtainCommissionsByItemCommissionUniqueId(String uniqueId) {
         return commissionRepository.findByItemCommissionUniqueId(uniqueId);
+    }
+
+        
+    public List<Commission> obtainCommissionsByItemCommissionId(String id) {
+        return commissionRepository.findByItemCommissionId(id);
     }
 
     public CommissionDTO create(CommissionDTO commissionDTO) {

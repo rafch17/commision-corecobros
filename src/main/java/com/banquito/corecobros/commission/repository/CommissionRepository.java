@@ -17,6 +17,9 @@ public interface CommissionRepository extends JpaRepository<Commission, Long> {
     @Query("SELECT c FROM Commission c JOIN c.commissions ic WHERE ic.uniqueId = :uniqueId")
     List<Commission> findByItemCommissionUniqueId(String uniqueId);
 
+    @Query("SELECT c FROM Commission c JOIN c.commissions ic WHERE ic.id = :id")
+    List<Commission> findByItemCommissionId(String id);
+
     Optional<Commission> findByCompanyUniqueId(String companyUniqueId);
 
 }

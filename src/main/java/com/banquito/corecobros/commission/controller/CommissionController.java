@@ -56,6 +56,17 @@ public class CommissionController {
         }
     }
 
+    @GetMapping("/item-commissionsById/{id}")
+    @Operation(summary = "Get ItemCommission by Id", description = "Retrieve a ItemCommission by its Id")
+    public ResponseEntity<List<Commission>> getByItemCommissionId(@PathVariable String id) {
+        List<Commission> commissions = commissionService.obtainCommissionsByItemCommissionId(id);
+        if (commissions.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(commissions);
+        }
+    }
+
     @PostMapping("/")
     @Operation(summary = "Create a commission", description = "Create a new commission")
     public ResponseEntity<CommissionDTO> create(@RequestBody CommissionDTO commissionDTO) {
