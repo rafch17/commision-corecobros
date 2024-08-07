@@ -79,24 +79,12 @@ public class CommissionController {
         }
     }
 
-    @PostMapping("/")
-    @Operation(summary = "Create a commission", description = "Create a new commission")
-    public ResponseEntity<CommissionDTO> create(@RequestBody CommissionDTO commissionDTO) {
-        try {
-            CommissionDTO savedCommission = commissionService.create(commissionDTO);
-            return ResponseEntity.ok(savedCommission);
-        } catch (RuntimeException rte) {
-            rte.printStackTrace();
-            return ResponseEntity.badRequest().build();
-        }
-    }
-
-    @GetMapping("/")
-    @Operation(summary = "Get all commissions", description = "Retrieve a list of all commissions")
-    public ResponseEntity<List<Commission>> getAllCommissions() {
-        List<Commission> commissions = commissionService.getAllCommissions();
+    @GetMapping("/item-commissionsById/{id}")
+    @Operation(summary = "Get ItemCommission by Id", description = "Retrieve a ItemCommission by its Id")
+    public ResponseEntity<List<Commission>> getByItemCommissionId(@PathVariable String id) {
+        List<Commission> commissions = commissionService.obtainCommissionsByItemCommissionId(id);
         if (commissions.isEmpty()) {
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.notFound().build();
         } else {
             return ResponseEntity.ok(commissions);
         }
