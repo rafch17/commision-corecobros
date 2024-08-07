@@ -22,7 +22,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @CrossOrigin(origins = "*", allowedHeaders = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT,
         RequestMethod.DELETE })
 @RestController
-@RequestMapping("/item-commission-microservice/api/v1/item-commissions")
+@RequestMapping("/commission-microservice/api/v1/item-commissions")
 @Tag(name = "ItemCommission", description = "Endpoints for managing item-commission")
 public class ItemCommissionController {
 
@@ -32,6 +32,18 @@ public class ItemCommissionController {
         this.itemCommissionService = itemCommissionService;
     }
 
+    @PostMapping
+    @Operation(summary = "Create a itemCommission", description = "Create a new itemCommission")
+    public ResponseEntity<ItemCommissionDTO> create(@RequestBody ItemCommissionDTO itemCommissionDTO) {
+        try {
+            ItemCommissionDTO savedItemCommission = itemCommissionService.create(itemCommissionDTO);
+            return ResponseEntity.ok(savedItemCommission);
+        } catch (RuntimeException rte) {
+            rte.printStackTrace();
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
     @GetMapping("/{uniqueId}")
     @Operation(summary = "Get itemCommission by uniqueId", description = "Retrieve a itemCommission by its uniqueId")
     public ResponseEntity<List<ItemCommissionDTO>> getItemCommissionByCommissionUniqueId(
@@ -39,18 +51,6 @@ public class ItemCommissionController {
         try {
             List<ItemCommissionDTO> itemCommission = itemCommissionService.obtainItemCommissionByUniqueId(uniqueId);
             return ResponseEntity.ok(itemCommission);
-        } catch (RuntimeException rte) {
-            rte.printStackTrace();
-            return ResponseEntity.badRequest().build();
-        }
-    }
-
-    @PostMapping("/")
-    @Operation(summary = "Create a itemCommission", description = "Create a new itemCommission")
-    public ResponseEntity<ItemCommissionDTO> create(@RequestBody ItemCommissionDTO itemCommissionDTO) {
-        try {
-            ItemCommissionDTO savedItemCommission = itemCommissionService.create(itemCommissionDTO);
-            return ResponseEntity.ok(savedItemCommission);
         } catch (RuntimeException rte) {
             rte.printStackTrace();
             return ResponseEntity.badRequest().build();
